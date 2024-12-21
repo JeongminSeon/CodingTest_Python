@@ -1,7 +1,12 @@
 function cal(p1, p2) {
-    // 두 선분의 교집합 계산
-    if (p1[0] >= p2[1] || p1[1] <= p2[0]) return [0, 0];
-    return [Math.max(p1[0], p2[0]), Math.min(p1[1], p2[1])];
+    // 두 선분이 겹치지 않는 경우
+    if (p1[1] <= p2[0] || p1[0] >= p2[1]) return [0, 0];
+
+    // 교집합 계산
+    const start = Math.max(p1[0], p2[0]);
+    const end = Math.min(p1[1], p2[1]);
+
+    return [start, end];
 }
 
 function length(point){
