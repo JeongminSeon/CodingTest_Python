@@ -20,7 +20,7 @@ function solution(lines) {
     let l2 = cal(p2, p3);
     let l3 = cal(p1, p3);
     
-    const [t1, t2] = [cal(l1, l2),cal(l2, l3)].sort();
+    const [t1, t2] = [cal(l1, l2),cal(l2, l3)];
 
     return length(l1) + length(l2) + length(l3) - length(t1) - length(t2);
 }
