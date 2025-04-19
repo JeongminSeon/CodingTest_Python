@@ -1,7 +1,4 @@
+
 function solution(s) {
-    
-    return s
-            .split(/(\s+)/)
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-            .join('');
+    return s.split(" ").map(v => v.charAt(0).toUpperCase() + v.substring(1).toLowerCase()).join(" ");
 }
