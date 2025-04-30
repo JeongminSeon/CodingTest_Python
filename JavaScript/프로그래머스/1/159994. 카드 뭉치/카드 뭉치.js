@@ -8,7 +8,7 @@ function solution(cards1, cards2, goal) {
         } else if (cards2[j] === goal[k]) {
             j++;
             k++;
-        } else if (cards1[i] !== goal[k] && cards2[j] !== goal[k]) {
+        } else {
             return "No"
         }
     }
