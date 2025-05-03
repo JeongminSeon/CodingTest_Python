@@ -1,15 +1,15 @@
 function solution(number, limit, power) {
-    let answer = [];
+    let answer = 0;
     Array.from({length : number}, (_, i) => i+1 ).forEach((num, index) => {
         let attack = getFactor(num);// 약수의 개수 = 무기 공격력
         if(attack > limit) {
-            answer[index] = power;
+            answer += power;
         } else {
-            answer[index] = attack;
+            answer += attack;
         }
     })
     
-    return answer.reduce((acc, cur) => acc + cur, 0);
+    return answer;
 }
 
 function getFactor(n) {
