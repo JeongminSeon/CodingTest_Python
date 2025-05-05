@@ -17,14 +17,10 @@ function solution(answers) {
         }
     })
     
-    let answer = [count1,count2,count3];
-    let ans = [];
-    let max = [count1,count2,count3].sort((a, b) => b - a)[0];
+    let scores = [count1, count2, count3];
+    let max = Math.max(...scores);
     
-    for(let i = 0; i < answer.length; i++) {
-        if(answer[i] === max) {
-            ans.push(i+1);
-        }
-    }
-    return ans;
+    return scores
+        .map((score, idx) => (score === max ? idx + 1 : null)) 
+        .filter(v => v !== null); // 최대값 아닌애들 제외
 }
