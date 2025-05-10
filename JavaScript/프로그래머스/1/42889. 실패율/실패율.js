@@ -1,16 +1,21 @@
 function solution(N, stages) {
-    let result = [];
+    let stagesCount = new Array(N+2).fill(0);
     
-    for(let i = 1; i <= N; i++) {
-        // 실패한 사람 (분자)
-        let reach = stages.filter((v) => v === i).length;
-        // 현재 도전 인원 (분모) 
-        let curr = stages.filter((v) => v >= i).length;
-        
-        result.push([i,reach/curr]);
+    for(let stage of stages) {
+        stagesCount[stage]++; // stage 별로 있는 인원들 세기
     }
     
-    result.sort((a,b) => b[1] - a[1]);
+    let people = stages.length; // 도전 인원 수
+    let result = [];
+    for(let i = 1; i <= N; i++) {
+        let cur = stagesCount[i];
+        let fail = stagesCount[i] / people;
+        people -= cur; // 실패한 인원 수만큼 전체 인원에서 제외
+        
+        result.push([i, fail]);
+    }
     
-    return result.map((item) => item[0]);
+    
+    result.sort((a,b) => b[1] - a[1]);
+    return result.map((v) => v[0])
 }
