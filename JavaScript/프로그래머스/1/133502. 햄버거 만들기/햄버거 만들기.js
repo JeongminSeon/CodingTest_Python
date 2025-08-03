@@ -14,10 +14,7 @@ function solution(ingredient) {
             stack[stack.length - 1] === 1
         ) {
             // 햄버거 완성 → 4개 제거
-            stack.pop();
-            stack.pop();
-            stack.pop();
-            stack.pop();
+            stack.splice(-4);
             answer++;
         }
     }
