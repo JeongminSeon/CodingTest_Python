@@ -1,18 +1,17 @@
 function solution(wallpaper) {
+    let lux = Infinity, luy = Infinity;
+    let rdx = -1, rdy = -1; 
     
-    let xPos = [];
-    let yPos = [];
     for(let i = 0; i < wallpaper.length; i++) {
         for(let j = 0; j < wallpaper[i].length; j++) {
             if(wallpaper[i][j] === '#') {
-                xPos.push(j); // 열 (X축)
-                yPos.push(i); // 행 (Y축)
+                lux = Math.min(lux, i);
+                luy = Math.min(luy, j);
+                rdx = Math.max(rdx, i + 1);
+                rdy = Math.max(rdy, j + 1);
             }
         }
     }
     
-    xPos.sort((a, b) => a - b);
-    yPos.sort((a, b) => a - b);
-    
-    return [yPos[0], xPos[0], yPos[yPos.length - 1] + 1, xPos[xPos.length - 1] + 1]
+    return [lux, luy, rdx, rdy]
 }
