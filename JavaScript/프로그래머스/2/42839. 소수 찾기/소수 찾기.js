@@ -1,46 +1,36 @@
-function solution(numbers) { 
+function solution(numbers) {
     let resultSet = new Set();
-    let number = numbers.split("");
+    let count = 0;
     
-    // 모든 조합을 만든다.
-    // 그 조합에서 소수가 되는지 확인.
+    let nums = numbers.split("");
     
-    generateNumbers("", number ,resultSet);
-    
-    let primeCount = 0;
-    for(let num of resultSet) {
-        if(isPrime(num)) {
-            primeCount++;
+    function generate(currentNum, remainNums) {
+        if(currentNum !== "") {
+            resultSet.add(Number(currentNum));
+        }
+        
+        for(let i = 0; i < remainNums.length; i++) {
+            const toAttach = remainNums[i];
+            const nextRemain = [...remainNums];
+            nextRemain.splice(i, 1);
+            
+            generate(currentNum + toAttach, nextRemain);
         }
     }
     
-    return primeCount;
-}
+    generate("", nums);
 
-function generateNumbers(currentNum, remainingNumbers, resultSet) {
-    
-    if(currentNum !== "") {
-        resultSet.add(Number(currentNum));
+    for(const num of resultSet) {
+        if(isPrime(num)) count++;
     }
     
-    for(let i = 0; i < remainingNumbers.length; i++) {
-        
-        // 이번에 고를 숫자
-        let numberToAttach = remainingNumbers[i];
-        
-        // 고른 조각을 뺀 나머지를 재귀로 호출
-        const nextRemaining = [...remainingNumbers];
-        nextRemaining.splice(i,1);
-        
-        generateNumbers(currentNum + numberToAttach, nextRemaining ,resultSet)
-    }
+    return count; 
+    
 }
 
 function isPrime(n) {
-    
     if(n < 2) return false;
-    
-    for(let i = 2; i <= Math.sqrt(n); i++){
+    for(let i = 2; i <= Math.sqrt(n); i++) {
         if(n % i === 0) return false;
     }
     
