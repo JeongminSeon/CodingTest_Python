@@ -1,16 +1,17 @@
 function solution(arr)
 {
     let answer = [];
-    answer.push(arr[0]);
     
-    if(arr.length === 1) {
-        return answer;
-    }
-    
-    for(let i = 1; i < arr.length; i++) {
-        if(answer[answer.length - 1 ] !== arr[i]) {
-            answer.push(arr[i]);
+    for(const num of arr) {
+        answer.push(num);
+        
+        if(answer.length >= 2) {
+            let lastIndex = answer.length - 1;
+            if(answer[lastIndex] === answer[lastIndex - 1]) {
+                answer.pop();
+            }
         }
     }
+    
     return answer;
 }
