@@ -1,14 +1,16 @@
 function solution(s){
     let stack = [];
-    
-    for(let item of s) {
-        if(item === "(") {
-            stack.push(1);
+    for(let letter of s) {
+        if(letter === '(') {
+            stack.push('(');
         } else {
             if(stack.length === 0) return false;
-            stack.pop();
+            
+            let pop = stack.pop();
+            
+            if(pop === ')') return false;
         }
     }
-
+    
     return stack.length === 0;
 }
