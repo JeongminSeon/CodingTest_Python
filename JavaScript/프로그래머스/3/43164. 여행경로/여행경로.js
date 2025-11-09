@@ -1,5 +1,5 @@
 function solution(tickets) {
-    const result = [];
+    let path = [];
     const graph = {};
     
     for(const [from, to] of tickets) {
@@ -10,24 +10,22 @@ function solution(tickets) {
         }
     }
     
-    for(const key in graph) {
-        graph[key].sort();
+    for(const city in graph) {
+        graph[city].sort();
     }
     
-    function dfs(currentCity) {
-        let destinations = graph[currentCity];
+    
+    function dfs(city) {
         
-        while(destinations && destinations.length > 0) {
-            let nextCity = destinations.shift(); // ticket 소모
+        while(graph[city] !== undefined && graph[city].length !== 0) {
+            let nextCity = graph[city].shift();
             dfs(nextCity);
         }
         
-        // ticket이 다 소모되면 result에 현재 도시 push
-        result.push(currentCity);
+        path.push(city);
     }
     
     dfs('ICN');
     
-    return result.reverse();
-    
+    return path.reverse();
 }
