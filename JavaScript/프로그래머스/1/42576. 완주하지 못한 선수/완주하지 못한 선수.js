@@ -1,20 +1,24 @@
 function solution(participant, completion) {
-    const table = {};
+    let answer = '';
+    let hash = {};
     
-    for(let name of participant) {
-        if(table[name] === undefined) {
-            table[name] = 1;
+    for(const p of participant) {
+        if(!hash[p]) {
+            hash[p] = 1;
         } else {
-            table[name]++;
+            hash[p]+=1;
         }
     }
     
-    for(let name of completion) {
-        table[name]--;
+    
+    for(const p of completion) {
+        hash[p] -= 1;
     }
     
-    for(let name in table) {
-        if(table[name] !== 0)
-            return name;
+    for(const key in hash) {
+        if(hash[key] !== 0) {
+            return key;
+        }
     }
+    
 }
