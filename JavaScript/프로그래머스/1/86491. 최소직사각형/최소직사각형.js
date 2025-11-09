@@ -1,18 +1,15 @@
 function solution(sizes) {
-    
     let maxW = -Infinity;
     let maxH = -Infinity;
     
-    for(let size of sizes) {
-        if(size[0] < size[1]) {
-            [size[1], size[0]] = [size[0], size[1]];
-        }
+    for(const size of sizes) {
+        size.sort((a, b) => a - b);
     }
     
-    for(let size of sizes) {
+    for(const size of sizes) {
         maxW = Math.max(maxW, size[0]);
         maxH = Math.max(maxH, size[1]);
-    } 
+    }
     
     return maxW * maxH;
 }
