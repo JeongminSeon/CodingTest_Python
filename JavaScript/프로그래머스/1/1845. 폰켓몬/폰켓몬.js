@@ -1,6 +1,11 @@
 function solution(nums) {
-    let answer = nums.length / 2;
-    let type = new Set(nums);
+    let map = new Map();
     
-    return answer >= type.size ? type.size : answer;
+    const n = nums.length / 2;
+    
+    for(const num of nums) {
+        map.set(num, (map.get(num) || 0) + 1);
+    }
+    
+    return map.size >= n ? n : map.size;
 }
