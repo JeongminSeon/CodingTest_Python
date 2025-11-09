@@ -1,19 +1,17 @@
 function solution(progresses, speeds) {
-    let answer = [];
-    
-    while(progresses.length !== 0) {
+    let answer = []; 
+    let head = 0;
+    while(head < progresses.length) {
         let count = 0;
-        progresses = progresses.map((progress, index) => {
-            return progress += speeds[index];
-        });
-        
-        while(progresses[0] >= 100) {
-            progresses.shift();
-            speeds.shift();
-            count++;
+        for(let i = 0; i < speeds.length; i++) {
+            progresses[i] += speeds[i];
+            if(progresses[head] >= 100) {
+                head++;
+                count++;
+            }
         }
         
-        if(count >= 1) answer.push(count); 
+        if(count !== 0) answer.push(count);
     }
     
     return answer;
