@@ -1,7 +1,7 @@
 function solution(tickets) {
-    let path = [];
     const graph = {};
-    
+    const path = [];
+
     for(const [from, to] of tickets) {
         if(!graph[from]) {
             graph[from] = [to];
@@ -10,22 +10,22 @@ function solution(tickets) {
         }
     }
     
-    for(const city in graph) {
-        graph[city].sort();
+    for(const key in graph) {
+        graph[key].sort();
     }
     
-    
     function dfs(city) {
+        let destinations = graph[city];
         
-        while(graph[city] !== undefined && graph[city].length !== 0) {
-            let nextCity = graph[city].shift();
+        while(destinations && destinations.length > 0) {
+            let nextCity = destinations.shift();
             dfs(nextCity);
         }
         
         path.push(city);
     }
     
-    dfs('ICN');
+    dfs('ICN')
     
     return path.reverse();
 }
