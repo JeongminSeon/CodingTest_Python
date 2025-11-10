@@ -35,6 +35,7 @@ function bfs(start, end, dist, maps) {
     const visited = new Array(rows).fill(null).map(() => new Array(cols).fill(false));
     
     let queue = [[...start, dist]];
+    visited[start[0]][start[1]] = true;
     let head = 0;
     
     while(head < queue.length) {
