@@ -1,23 +1,20 @@
 function solution(begin, target, words) {
+    const visited = new Array(words.length).fill(false);
+    
     const queue = [];
-    const visited = {};
-    
     queue.push([begin, 0]);
-    visited[begin] = true;
-    
     let head = 0;
     
-    while (head < queue.length) {
-        
-        const [currentWord, step] = queue[head];
+    while(head < queue.length) {
+        const [currentWord, steps] = queue[head];
         head++;
         
-        if(currentWord === target) return step;
+        if(currentWord === target) return steps;
         
-        for(const word of words) {
-            if(!visited[word] && isOneDiff(currentWord, word)) {
-                visited[word] = true;
-                queue.push([word, step + 1]);
+        for(let i = 0; i < words.length; i++) {
+            if(!visited[i] && isOneDiff(currentWord, words[i])) {
+                visited[i] = true;
+                queue.push([words[i], steps + 1]);
             }
         }
     }
@@ -25,7 +22,6 @@ function solution(begin, target, words) {
     return 0;
 }
 
-// helper 함수
 function isOneDiff(word1, word2) {
     let diff = 0;
     
