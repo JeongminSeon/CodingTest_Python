@@ -1,24 +1,24 @@
 function solution(k, dungeons) {
-    let maxDungeons = 0;
+    let count = 0;
     const visited = new Array(dungeons.length).fill(false);
     
-    function dfs(currentK, count) {
-        maxDungeons = Math.max(maxDungeons, count);
+    function dfs(health, step) {
+        count = Math.max(count, step)
         
-        for(let i =0; i < dungeons.length; i++) {
+        for(let i = 0; i < dungeons.length; i++) {
             const [minHealth, useHealth] = dungeons[i];
             
-            if(!visited[i] && currentK >= minHealth) {
+            if(!visited[i] && health >= minHealth) {
                 visited[i] = true;
                 
-                dfs(currentK - useHealth, count + 1);
+                dfs(health - useHealth, step + 1);
                 
                 visited[i] = false;
             }
         }
     }
     
-    dfs(k, 0);
-    
-    return maxDungeons;
+    dfs(k, count);
+        
+    return count;
 }
