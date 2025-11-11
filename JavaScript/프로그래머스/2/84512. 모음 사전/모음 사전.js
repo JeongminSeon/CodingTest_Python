@@ -1,22 +1,28 @@
-function solution(word) {
-    const dictionary = [];
-    const vowels = ['A', 'E', 'I', 'O', 'U'];
+function solution(target) {
+    const words = ['A', 'E', 'I', 'O', 'U']
+    let answer = 0;
+    let found = false;
     
-    function generate(currentWord){
-        if(currentWord.length > 5) {
-            return; // 길이 5 초과 종료
+    function dfs(currentWord) {
+        if(currentWord.length > 5 || found) {
+            return;
         }
         
-        if(currentWord !== "") {
-            dictionary.push(currentWord);
+        if (currentWord !== "") {
+            answer++;
+            
+            if (currentWord === target) {
+                found = true;
+                return;
+            }
         }
         
-        for(const vowel of vowels) {
-            generate(currentWord + vowel);
+        for(let i = 0; i < 5; i++) {
+            dfs(currentWord + words[i]);
         }
     }
     
-    generate("");
+    dfs('');
     
-    return dictionary.indexOf(word) + 1;
+    return answer;
 }
